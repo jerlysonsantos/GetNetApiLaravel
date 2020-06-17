@@ -16,7 +16,6 @@ class Body extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       logged: props.isLoggedIn
     };

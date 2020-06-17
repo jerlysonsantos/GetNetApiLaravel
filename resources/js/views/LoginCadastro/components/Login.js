@@ -42,17 +42,13 @@ class Login extends Component {
       if (form.checkValidity())
         await axios.post('auth/doLogin', info)
           .then((res) => {
-            const { data } = res;
-            console.log(data)
+            const { user } = res.data;
+            localStorage.setItem('user', JSON.stringify(user));
+            window.location.href = '/';
           })
           .catch((error) => {
             const { data } = error.response;
-
-            const { email, password } = data;
-
-            console.log(email[0]);
-            console.log(password[0]);
-
+            alert(data);
           });
 
     } catch(error) {

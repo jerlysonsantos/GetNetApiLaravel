@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 
+import { BrowserRouter } from 'react-router-dom';
+
 function Logged(props) {
-  const isLogged = props.isLoggedIn;
-  if (isLogged) {
-    return <h1>{ user.name }</h1>;
+  const { isLoggedIn } = props;
+  const user = JSON.parse(props.user);
+
+  if (isLoggedIn) {
+    return (
+      <div>
+        <h1>{ user.name } <Button variant="danger" onClick={ () => {
+          localStorage.removeItem('user');
+          window.location.reload(false);
+         } }>Log out</Button></h1>
+      </div>
+    );
   } else {
     return <Button variant="primary" href="/login">Login / Cadastro</Button>;
   }
@@ -44,7 +55,7 @@ class Header extends Component {
               <Nav.Link href="/">Main</Nav.Link>
               <Nav.Link href="/store">Store</Nav.Link>
             </Nav>
-            <Logged isLoggedIn={this.state.logged} user={this.state.user}/>
+            <Logged isLoggedIn={ this.state.logged } user={ this.state.user }/>
             <div style={{ marginLeft: '20px' }}>
               <h3>
                 { this.state.date.toLocaleTimeString() }

@@ -17,6 +17,7 @@ Route::view('/{path?}', 'app');
 
 Route::prefix('auth')->group(function () {
   Route::post('doLogin', 'AuthController@doLogin');
+  Route::post('doRegister', 'AuthController@doRegister');
 });
 
 Route::prefix('getnetapi')->group(function () {

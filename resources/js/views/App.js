@@ -13,27 +13,25 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    const user = localStorage.getItem('user')
+
+    const user = localStorage.getItem('user');
 
     this.state = {
-      logged: false,
-      user
+      logged: user ? true: false,
+      user,
     }
-
-    if (user) this.setState({ logged: true });
 
   }
 
   render () {
 
-
     return (
       <BrowserRouter>
         <div>
-          <Header isLoggedIn={this.state.logged} user={this.state.user} />
+          <Header isLoggedIn={ this.state.logged } user={ this.state.user } />
         </div>
         <Switch>
-          <Route exact path="/" component={ Body } isLoggedIn={this.state.logged} />
+          <Route exact path="/" component={ () => <Body isLoggedIn={ this.state.logged } /> }/>
           <Route exact path="/store" component={ Store } />
           <Route exact path="/product" component={ Product } />
           <Route exact path="/login" component={ LoginCadastro } />
