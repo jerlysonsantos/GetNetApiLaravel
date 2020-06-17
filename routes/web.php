@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/{path?}', 'app');
 
+Route::prefix('auth')->group(function () {
+  Route::post('doLogin', 'AuthController@doLogin');
+});
+
 Route::prefix('getnetapi')->group(function () {
   Route::get('index', 'GetNetAPI@index');
   Route::post('transaction', 'GetNetAPI@buyTest');
